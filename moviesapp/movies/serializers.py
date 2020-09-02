@@ -25,7 +25,13 @@ class ReviewSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class MovieSerializer(serializers.HyperlinkedModelSerializer):
+    rating = serializers.SerializerMethodField('get_rating')
+    reviews = ReviewSerializer(many=True, read_only=True)
     
     class Meta:
         model = Movie
-        fields = ['url', 'id', 'title', 'year', 'released_on', 'genre', 'director', 'plot', 'created_at', 'updated_at']
+        fields = ['url', 'id', 'title', 'rating', 'year', 'rated', 'released_on', 'genre', 'director', 'plot', 'reviews']
+
+    def get_rating(self, obj):
+        rating = obj.get_rating()
+        return rating

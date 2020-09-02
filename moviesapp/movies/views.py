@@ -12,7 +12,7 @@ class MovieViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows movies to be viewed or edited.
     """
-    queryset = Movie.objects.all().order_by('-year') # '-rating'
+    queryset = Movie.objects.all().order_by('-year', '-rating')
     serializer_class = MovieSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
