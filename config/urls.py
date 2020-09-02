@@ -4,13 +4,17 @@ from django.urls import include, path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views import defaults as default_views
-from django.views.generic import TemplateView
+from rest_framework import routers
+from moviesapp.movies import views
 
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+router.register(r'movies', views.MovieViewSet)
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='pages/home.html'), name='home'),
-    path('movies/', include('moviesapp.movies.urls')),
-
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path(settings.ADMIN_URL, admin.site.urls),  # {% url 'admin:index' %}
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

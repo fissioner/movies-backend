@@ -21,6 +21,7 @@ DJANGO_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 
     # Useful template tags:
     # 'django.contrib.humanize',
@@ -145,3 +146,10 @@ AUTHENTICATION_BACKENDS = (
 )
 
 ADMIN_URL = 'admin/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+}

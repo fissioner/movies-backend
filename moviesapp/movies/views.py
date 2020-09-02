@@ -2,32 +2,30 @@
 
 """Movies views."""
 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib import messages
-from django.shortcuts import redirect
-from django.http import Http404
-from django.urls import reverse_lazy
-
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from moviesapp.movies.serializers import UserSerializer, GroupSerializer, MovieSerializer
 from .models import Movie
 
 
-class MovieListView(ListView):
-    """Show all movies."""
+class MovieViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows movies to be viewed or edited.
+    """
+    queryset = Movie.objects.all().order_by('-year') # '-rating'
+    serializer_class = MovieSerializer
 
-    model = Movie
-
-
-class MovieDetailView(DetailView):
-    """Show the requested movie."""
-
-
-class MovieCreateView(CreateView):
-    """Create a new movie."""
-
-
-class MovieUpdateView(UpdateView):
-    """Update the requested movie."""
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
 
 
-class MovieDeleteView(DeleteView):
-    """Delete the requested movie."""
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
