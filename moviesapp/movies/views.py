@@ -3,7 +3,7 @@
 """Movies views."""
 
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from moviesapp.movies.serializers import UserSerializer, GroupSerializer, MovieSerializer, ReviewSerializer
 from .models import Movie, Review
 
@@ -14,6 +14,8 @@ class MovieViewSet(viewsets.ModelViewSet):
     """
     queryset = Movie.objects.all().order_by('-year', '-rating')
     serializer_class = MovieSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['^title', 'rating', 'year', 'rated', 'released_on', 'genre', 'director']
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -31,6 +33,8 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
 class ReviewViewSet(viewsets.ModelViewSet):
-    """CRUD operations for reviews."""
+    """
+    API endpoint that allows reviews to be viewed or edited.
+    """
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
