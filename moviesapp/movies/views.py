@@ -4,8 +4,8 @@
 
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from moviesapp.movies.serializers import UserSerializer, GroupSerializer, MovieSerializer
-from .models import Movie
+from moviesapp.movies.serializers import UserSerializer, GroupSerializer, MovieSerializer, ReviewSerializer
+from .models import Movie, Review
 
 
 class MovieViewSet(viewsets.ModelViewSet):
@@ -29,3 +29,8 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+class ReviewViewSet(viewsets.ModelViewSet):
+    """CRUD operations for reviews."""
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer

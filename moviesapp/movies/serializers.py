@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from moviesapp.movies.models import Movie
+from moviesapp.movies.models import Movie, Review
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,6 +15,13 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
         fields = ['url', 'name']
+
+
+class ReviewSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Review
+        fields = '__all__'
 
 
 class MovieSerializer(serializers.HyperlinkedModelSerializer):
