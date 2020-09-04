@@ -13,3 +13,8 @@ __pycache__/
 .DS_Store
 mov/
 moviesapp.db
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
