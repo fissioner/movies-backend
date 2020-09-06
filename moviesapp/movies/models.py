@@ -8,6 +8,7 @@ from statistics import mean
 
 class Movie(models.Model):
     title = models.CharField(_('Movie\'s title'), max_length=255)
+    poster = models.ImageField(upload_to="images/posters/", default='images/posters/movie_camera.png')
     year = models.PositiveIntegerField(default=2019)
     rating = models.IntegerField(null=True, blank=True, validators=[MinValueValidator(1), MaxValueValidator(5)])
     # Example: PG-13
