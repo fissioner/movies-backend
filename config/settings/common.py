@@ -21,7 +21,7 @@ DJANGO_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
+
 
     # Useful template tags:
     # 'django.contrib.humanize',
@@ -29,7 +29,10 @@ DJANGO_APPS = (
     # Admin
     'django.contrib.admin',
 )
-THIRD_PARTY_APPS = ()
+THIRD_PARTY_APPS = (
+    'rest_framework',
+    'corsheaders',
+)
 
 LOCAL_APPS = (
     'moviesapp.movies.apps.MoviesConfig',
@@ -45,13 +48,14 @@ MIDDLEWARE = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 )
 
 MIGRATION_MODULES = {
     'sites': 'moviesapp.contrib.sites.migrations'
 }
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 SECRET_KEY = 'CHANGEME'
 
@@ -153,3 +157,12 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
+
+MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+)
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_CREDENTIALS = True
