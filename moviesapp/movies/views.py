@@ -6,6 +6,8 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, filters
 from moviesapp.movies.serializers import UserSerializer, GroupSerializer, MovieSerializer, ReviewSerializer
 from .models import Movie, Review
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 class MovieViewSet(viewsets.ModelViewSet):
@@ -38,3 +40,5 @@ class ReviewViewSet(viewsets.ModelViewSet):
     """
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
