@@ -1,1 +1,1 @@
-web: sh -c 'python manage.py makemigrations movies && python manage.py migrate && python manage.py loaddata movie && python manage.py runserver'
+web: sh -c 'python manage.py makemigrations movies && python manage.py migrate && python manage.py loaddata movie'
